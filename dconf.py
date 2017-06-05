@@ -1,5 +1,70 @@
 #!/usr/bin/python
 
+# (c) 2017, Josef Friedrich <josef@friedrich.rocks>
+#
+# This module is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this software.  If not, see <http://www.gnu.org/licenses/>.
+
+ANSIBLE_METADATA = {'metadata_version': '1.0',
+                    'status': ['preview'],
+                    'supported_by': 'community'}
+
+DOCUMENTATION = '''
+---
+module: dconf
+short_description: Ansible module for setting dconf / gsettings entries.
+description:
+    - dconf U(https://wiki.gnome.org/Projects/dconf) and gsettings
+      are command line utilities to manage configurations for the gnome
+      desktop.
+
+author: "Josef Friedrich (@Josef-Friedrich)"
+options:
+    key:
+        description:
+            - Delete bookmarks of nonexistent directories.
+        required: true
+    schema:
+        description:
+            - Name of the bookmark.
+        required: true
+    value:
+        description:
+            - Full path to the directory.
+        required: true
+'''
+
+EXAMPLES = '''
+# Set a string value
+- dconf:
+    key: dock-position
+    value: BOTTOM
+    schema: org.gnome.shell.extensions.dash-to-dock
+
+# Set a integer value
+- dconf:
+    key: dash-max-icon-size 
+    value: 64
+    schema: org.gnome.shell.extensions.dash-to-dock
+
+# Set a boolean value
+- dconf:
+    key: show-apps-at-top
+    value: yes
+    schema: org.gnome.shell.extensions.dash-to-dock
+'''
+
+
 import os
 import subprocess
 from ansible.module_utils.basic import AnsibleModule
@@ -37,8 +102,8 @@ def main():
 
     module = AnsibleModule(
         argument_spec={
-            'schema': {'required': True},
             'key': {'required': True},
+            'schema': {'required': True},
             'value': {'required': True},
         },
         supports_check_mode=True,

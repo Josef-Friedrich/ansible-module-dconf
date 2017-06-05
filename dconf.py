@@ -7,11 +7,15 @@ import gi
 from gi.repository import Gio, GLib
 gi.require_version('Gtk', '3.0')
 
+
 def set_env():
-    pid = subprocess.check_output(["pgrep", "-n", "gnome-session"]).strip()
-    cmd = "grep -z DBUS_SESSION_BUS_ADDRESS /proc/" + pid + "/environ | cut -d= -f2-"
-    value = subprocess.check_output(['/bin/sh', '-c', cmd]).strip().replace("\0", "")
-    os.environ["DBUS_SESSION_BUS_ADDRESS"] = value
+    env = 'DBUS_SESSION_BUS_ADDRESS'
+    proc = 'gnome-session'
+    pid = subprocess.check_output(['pgrep', '-n', proc]).strip()
+    cmd = 'grep -z ' + env + ' /proc/' + pid + '/environ | cut -d= -f2-'
+    output = subprocess.check_output(['/bin/sh', '-c', cmd])
+    os.environ[env] = output.strip().replace('\0', '')
+
 
 def main():
 
@@ -33,6 +37,7 @@ def main():
     output = schema.get_value(p['key'])
 
     module.exit_json(changed=True, msg=str(output))
+
 
 if __name__ == '__main__':
     main()

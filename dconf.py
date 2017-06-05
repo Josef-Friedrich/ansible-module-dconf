@@ -32,15 +32,17 @@ author: "Josef Friedrich (@Josef-Friedrich)"
 options:
     key:
         description:
-            - Delete bookmarks of nonexistent directories.
+            - E. g.: dash-max-icon-size
         required: true
     schema:
         description:
-            - Name of the bookmark.
+            - E. g.: org.gnome.shell.extensions.dash-to-dock
         required: true
     value:
         description:
-            - Full path to the directory.
+            - string value: BOTTOM
+            - integer values: 46
+            - boolean values: yes, no, true, false
         required: true
 '''
 
@@ -53,7 +55,7 @@ EXAMPLES = '''
 
 # Set a integer value
 - dconf:
-    key: dash-max-icon-size 
+    key: dash-max-icon-size
     value: 64
     schema: org.gnome.shell.extensions.dash-to-dock
 

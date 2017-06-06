@@ -32,18 +32,21 @@ author: "Josef Friedrich (@Josef-Friedrich)"
 options:
     key:
         description:
-            - E. g.: dash-max-icon-size
+            - The name of the key.
+            - 'E. g.: dash-max-icon-size'
         required: true
     schema:
         description:
-            - E. g.: org.gnome.shell.extensions.dash-to-dock
+            - 'E. g.: org.gnome.shell.extensions.dash-to-dock'
         required: true
     value:
         description:
-            - string value: BOTTOM
-            - integer values: 46
-            - boolean values: yes, no, true, false
+            - The name of the schema.
+            - 'string value: BOTTOM'
+            - 'integer values: 46'
+            - 'boolean values: yes, no, true, false'
         required: true
+version_added: 1.0
 '''
 
 EXAMPLES = '''
@@ -66,6 +69,33 @@ EXAMPLES = '''
     schema: org.gnome.shell.extensions.dash-to-dock
 '''
 
+RETURN = '''
+key:
+    description: The name of the key.
+    returned: always
+    type: string
+    sample: dash-max-icon-size
+new_value:
+    description: The new value in the serialized Gvariant format.
+    returned: always
+    type: string
+    sample: 'BOTTOM'
+old_value_input:
+    description: The old value as specified.
+    returned: always
+    type: string
+    sample: BOTTOM
+old_value:
+    description: The old value in the serialized Gvariant format.
+    returned: always
+    type: string
+    sample: 'BOTTOM'
+schema:
+    description: The name of the schema.
+    returned: always
+    type: string
+    sample: org.gnome.shell.extensions.dash-to-dock
+'''
 
 import os
 import subprocess

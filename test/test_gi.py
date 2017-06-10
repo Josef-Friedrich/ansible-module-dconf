@@ -12,4 +12,5 @@ gi.require_version('Gtk', '3.0')
 class TestUnitTest(unittest.TestCase):
 
     def test_unit(self):
-        self.assertTrue(True)
+        Gio.Settings.list_schemas()
+        self.assertEqual(Gio.Settings.list_schemas(), True)

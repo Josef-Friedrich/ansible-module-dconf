@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="rocks.friedrich.test" path="/rocks/friedrich/test/">
+      <key type="b" name="mybool">
+          <default>false</default>
+          <summary>Example summary</summary>
+          <description>Example description</description>
+      </key>
+  </schema>
+</schemalist>

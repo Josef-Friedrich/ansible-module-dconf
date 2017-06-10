@@ -23,4 +23,4 @@ install:
   - sudo pip install tox
 
 script:
-  - xvfb-run -a "tox"
+  - export $(dbus-launch); xvfb-run -a "tox"

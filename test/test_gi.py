@@ -32,6 +32,6 @@ class TestUnitTest(unittest.TestCase):
         schema = schema_source.lookup(schema_id='rocks.friedrich.test', recursive=False)
         settings = Gio.Settings.new_full(schema, None, None)
         settings.set_boolean('mybool', True)
-        self.assertEqual(str(settings.get_value('mybool')), 'false')
+        self.assertEqual(str(settings.get_value('mybool')), 'true')
         settings.set_string('mystring', 'troll')
         self.assertEqual(str(settings.get_value('mystring')), "'troll'")

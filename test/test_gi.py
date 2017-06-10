@@ -16,5 +16,7 @@ class TestUnitTest(unittest.TestCase):
         # travis: 'org.freedesktop.ColorHelper', 'org.gtk.Settings.ColorChooser', 'org.gtk.Settings.FileChooser'
         # self.assertEqual(Gio.Settings.list_schemas(), True)
 
-        # local: 'display-gamma', 'profile-upload-uri', 'display-whitepoint', 'sample-delay'
-        self.assertEqual(Gio.Settings('org.freedesktop.ColorHelper').list_keys(), True)
+        # local and travis: 'display-gamma', 'profile-upload-uri', 'display-whitepoint', 'sample-delay'
+        #self.assertEqual(Gio.Settings('org.freedesktop.ColorHelper').list_keys(), True)
+
+        self.assertEqual(str(Gio.Settings('org.freedesktop.ColorHelper').get_value('sample-delay')), '400')

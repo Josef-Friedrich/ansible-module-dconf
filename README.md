@@ -3,6 +3,9 @@
 This module uses the
 [PyGObject](https://pygobject.readthedocs.io/en/latest/) Python package.
 
+
+On Ubuntu 17.04 the `git` package is located at `/usr/lib/python2.7/dist-packages/gi` for Python 2.7 and at `/usr/lib/python3/dist-packages/gi` for Python 3.
+
 ```
 > DCONF
 

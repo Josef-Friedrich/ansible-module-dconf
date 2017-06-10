@@ -12,5 +12,9 @@ gi.require_version('Gtk', '3.0')
 class TestUnitTest(unittest.TestCase):
 
     def test_unit(self):
-        Gio.Settings.list_schemas()
-        self.assertEqual(Gio.Settings.list_schemas(), True)
+        # Gio.Settings.list_schemas()
+        # travis: 'org.freedesktop.ColorHelper', 'org.gtk.Settings.ColorChooser', 'org.gtk.Settings.FileChooser'
+        # self.assertEqual(Gio.Settings.list_schemas(), True)
+
+        # local: 'display-gamma', 'profile-upload-uri', 'display-whitepoint', 'sample-delay'
+        self.assertEqual(Gio.Settings('org.freedesktop.ColorHelper').list_keys(), True)

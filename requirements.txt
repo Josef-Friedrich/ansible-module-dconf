@@ -1,6 +1,5 @@
 ansible
 flake8
-nose
 
 # From: test/utils/tox/requirements.txt
 mock >= 1.0.1, < 1.1

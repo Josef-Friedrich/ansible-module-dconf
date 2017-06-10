@@ -1,5 +1,8 @@
 # ansible-module-dconf
 
+This module uses the
+[PyGObject](https://pygobject.readthedocs.io/en/latest/) Python package.
+
 ```
 > DCONF
 

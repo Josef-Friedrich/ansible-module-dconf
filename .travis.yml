@@ -1,0 +1,26 @@
+# https://github.com/pygobject/pygobject-travis-ci-examples/blob/master/.travis.yml
+
+matrix:
+  include:
+    - os: linux
+      sudo: required
+      dist: trusty
+      language: python
+      python: "2.7_with_system_site_packages"
+      env: PACKAGES="xvfb gir1.2-gtk-3.0 python-gi python-gi-cairo pep8 pyflakes python-pytest" PYTHON="python"
+    # - os: linux
+    #   sudo: required
+    #   dist: trusty
+    #   language: python
+    #   python: "3.4_with_system_site_packages"
+    #   env: PACKAGES="xvfb gir1.2-gtk-3.0 python3-gi python3-gi-cairo python3-pep8 pyflakes python3-pytest" PYTHON="python3"
+    # - python: 3.4
+    #   env: TOXENV=flake
+
+install:
+  - sudo apt-get update -q
+  - sudo apt-get install --no-install-recommends -y $(echo $PACKAGES)
+  - sudo pip install tox
+
+script:
+  - xvfb-run -a "tox"

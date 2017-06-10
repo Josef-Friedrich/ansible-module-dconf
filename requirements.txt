@@ -1,0 +1,17 @@
+ansible
+flake8
+nose
+
+# From: test/utils/tox/requirements.txt
+mock >= 1.0.1, < 1.1
+passlib
+coverage
+coveralls
+unittest2
+redis
+python-memcached
+python-systemd
+pycrypto
+botocore
+boto3
+pytest

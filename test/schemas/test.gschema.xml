@@ -6,5 +6,10 @@
           <summary>Example summary</summary>
           <description>Example description</description>
       </key>
+      <key type="s" name="mystring">
+          <default>'lol'</default>
+          <summary>Example summary</summary>
+          <description>Example description</description>
+      </key>
   </schema>
 </schemalist>

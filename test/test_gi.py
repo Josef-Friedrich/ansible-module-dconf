@@ -33,3 +33,5 @@ class TestUnitTest(unittest.TestCase):
         settings = Gio.Settings.new_full(schema, None, None)
         settings.set_boolean('mybool', True)
         self.assertEqual(str(settings.get_value('mybool')), 'false')
+        settings.set_string('mystring', 'troll')
+        self.assertEqual(str(settings.get_value('mystring')), "'troll'")

@@ -125,7 +125,7 @@ def set_env():
     env = 'DBUS_SESSION_BUS_ADDRESS'
     proc = 'gnome-session'
     pid = subprocess.check_output(['pgrep', '-n', proc]).strip()
-    cmd = 'grep -z ' + env + ' /proc/' + pid + '/environ | cut -d= -f2-'
+    cmd = 'grep -z ' + str(env) + ' /proc/' + str(pid) + '/environ | cut -d= -f2-'
     output = subprocess.check_output(['/bin/sh', '-c', cmd])
     os.environ[env] = output.strip().replace('\0', '')
 

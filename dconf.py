@@ -171,7 +171,8 @@ def main():
     module.exit_json(changed=changed,
                      key=p['key'],
                      schema=p['schema'],
-                     old_value_input=p['value'],
+                     input=p['value'],
+                     input_gvariant=str(g_variant(p['value'])),
                      old_value=str(old_value),
                      new_value=str(new_value))
 

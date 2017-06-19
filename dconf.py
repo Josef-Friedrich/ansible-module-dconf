@@ -104,6 +104,7 @@ import gi
 from gi.repository import Gio, GLib
 gi.require_version('Gtk', '3.0')
 
+
 def g_variant(value):
     try:
         value = int(value)
@@ -120,20 +121,25 @@ def g_variant(value):
     elif isinstance(value, list):
         return GLib.Variant('as', value)
 
+
 env = 'DBUS_SESSION_BUS_ADDRESS'
+
 
 def get_env():
     proc = 'gnome-session'
     pid = subprocess.check_output(['pgrep', '-n', proc]).strip()
-    cmd = 'grep -z ' + str(env) + ' /proc/' + str(pid) + '/environ | cut -d= -f2-'
+    cmd = 'grep -z ' + str(env) + ' /proc/' + str(pid) + \
+        '/environ | cut -d= -f2-'
     output = subprocess.check_output(['/bin/sh', '-c', cmd])
     return output.strip().replace('\0', '')
+
 
 def set_env(dbus):
     if dbus:
         os.environ[env] = dbus
     else:
         os.environ[env] = get_env()
+
 
 def main():
 
@@ -142,7 +148,8 @@ def main():
             'key': {'required': True},
             'schema': {'required': True},
             'value': {'required': True},
-            'dbus_session_bus_address': {'aliases': ['dbus', 'dbus_address'], 'default': False}
+            'dbus_session_bus_address': {'aliases': ['dbus', 'dbus_address'],
+                                         'default': False}
         },
         supports_check_mode=True,
     )

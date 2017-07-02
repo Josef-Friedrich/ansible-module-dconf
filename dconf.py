@@ -104,6 +104,7 @@ import gi
 from gi.repository import Gio, GLib
 gi.require_version('Gtk', '3.0')
 
+
 def g_variant(value):
     try:
         value = int(value)
@@ -121,13 +122,23 @@ def g_variant(value):
         return GLib.Variant('as', value)
 
 
-def set_env():
-    env = 'DBUS_SESSION_BUS_ADDRESS'
+env = 'DBUS_SESSION_BUS_ADDRESS'
+
+
+def get_env():
     proc = 'gnome-session'
     pid = subprocess.check_output(['pgrep', '-n', proc]).strip()
-    cmd = 'grep -z ' + env + ' /proc/' + pid + '/environ | cut -d= -f2-'
+    cmd = 'grep -z ' + str(env) + ' /proc/' + str(pid) + \
+        '/environ | cut -d= -f2-'
     output = subprocess.check_output(['/bin/sh', '-c', cmd])
-    os.environ[env] = output.strip().replace('\0', '')
+    return output.strip().replace('\0', '')
+
+
+def set_env(dbus):
+    if dbus:
+        os.environ[env] = dbus
+    else:
+        os.environ[env] = get_env()
 
 def launch_debus():
     p = subprocess.Popen('dbus-launch', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -142,13 +153,15 @@ def main():
             'key': {'required': True},
             'schema': {'required': True},
             'value': {'required': True},
+            'dbus_session_bus_address': {'aliases': ['dbus', 'dbus_address'],
+                                         'default': False}
         },
         supports_check_mode=True,
     )
 
     p = module.params
 
-    set_env()
+    set_env(p['dbus_session_bus_address'])
 
     changed = False
     schema = Gio.Settings(p['schema'])
@@ -163,7 +176,8 @@ def main():
     module.exit_json(changed=changed,
                      key=p['key'],
                      schema=p['schema'],
-                     old_value_input=p['value'],
+                     input=p['value'],
+                     input_gvariant=str(g_variant(p['value'])),
                      old_value=str(old_value),
                      new_value=str(new_value))
 

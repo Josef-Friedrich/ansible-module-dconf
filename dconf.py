@@ -129,6 +129,11 @@ def set_env():
     output = subprocess.check_output(['/bin/sh', '-c', cmd])
     os.environ[env] = output.strip().replace('\0', '')
 
+def launch_debus():
+    p = subprocess.Popen('dbus-launch', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    for var in p.stdout:
+      sp = var.split('=', 1)
+      os.environ[sp[0]] = sp[1][:-1]
 
 def main():
 

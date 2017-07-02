@@ -24,6 +24,7 @@ class TestUnitTest(unittest.TestCase):
 
 
     def test_new_schema(self):
+        dconf.launch_debus()
         schema_source = Gio.SettingsSchemaSource.new_from_directory(
             directory=os.path.abspath(os.path.join('test', 'schemas')),
             parent=Gio.SettingsSchemaSource.get_default(),
@@ -32,6 +33,9 @@ class TestUnitTest(unittest.TestCase):
         schema = schema_source.lookup(schema_id='rocks.friedrich.test', recursive=False)
         settings = Gio.Settings.new_full(schema, None, None)
         settings.set_boolean('mybool', True)
-        self.assertEqual(str(settings.get_value('mybool')), 'true')
+        self.assertEqual(str(settings.get_value('mybool')), 'false')
         settings.set_string('mystring', 'troll')
-        self.assertEqual(str(settings.get_value('mystring')), "'troll'")
+        self.assertEqual(str(settings.get_value('mystring')), "'lol'")
+
+
+    #def test_launch_dbus(self):

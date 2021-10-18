@@ -9,8 +9,8 @@ On Ubuntu 17.04 the `gi` package is located at
 
 Simular projects:
 
-* (jistr/ansible-dconf)[https://github.com/jistr/ansible-dconf]
-* (MortenStabenau/ansible-dconf)[https://github.com/MortenStabenau/ansible-dconf]
+* [jistr/ansible-dconf](https://github.com/jistr/ansible-dconf)
+* [MortenStabenau/ansible-dconf](https://github.com/MortenStabenau/ansible-dconf)
 
 ```
 > DCONF
